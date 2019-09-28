@@ -61,17 +61,24 @@ class Questionnaire extends React.Component {
       if (this.state.questionNumber < this.state.questionLength - 1) {
         let ansObj = { "userId": this.state.id, "response": this.state.selectedAnswer, "questionId": this.state.questions[this.state.questionNumber].qid }
         let tempObj = this.state.postArray;
-        tempObj.answers.push(ansObj);
+        tempObj.answers.push(ansObj.label);
         this.setState({questionNumber: this.state.questionNumber += 1, postArray: tempObj})
         console.log(this.state.postArray);
         //axios.post("http://localhost:1000/api/answers")
       }
       else {
         this.setState({lastQuestion: true});
-        axios.post("http://localhost:1000/api/answers", this.state.postArray);
+        axios.post("http://localhost:1000/api/answers", this.state.postArray)
+        .then(response => {
+          //console.log(response);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
       }
-      console.log(this.state.selectedAnswer);
-      this.setState({selectedAnswer: ''});
+      //console.log(this.state.selectedAnswer);
+      //this.setState({selectedAnswer: ''});
     };
 
     handleChange = selectedAnswer => {
@@ -80,7 +87,7 @@ class Questionnaire extends React.Component {
     };
 
     render() {
-    console.log(this.state.id);
+    //console.log(this.state.id);
     //console.log(this.state.answers);
     let index = this.state.questionNumber;
     const { selectedAnswer } = this.state.selectedAnswer;
