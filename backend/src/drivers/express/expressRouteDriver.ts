@@ -5,6 +5,7 @@ import * as reportHandlerFunctions from "../../business-logic/handlers/reportsHa
 import * as adminHandlerFunctions from "../../business-logic/handlers/adminHandler";
 import * as questionHandlerFunctions from "../../business-logic/handlers/questionHandler";
 import * as answerHandlerFunctions from "../../business-logic/handlers/answersHandler";
+import * as metricsHandlerFunctions from "../../business-logic/handlers/metricsHandler";
 
 import { Response } from "express-serve-static-core";
 //import { loginRequest } from "../../shared/entity";
@@ -30,6 +31,7 @@ export class ExpressRouteDriver {
     this.initAdminRoutes(router);
     this.initQuestionRoutes(router);
     this.initAnswersRoutes(router);
+    this.initMetricsRoutes(router);
     return router;
   }
   private static initUserRoutes(router: Router) {
@@ -140,6 +142,12 @@ export class ExpressRouteDriver {
         res.send(404);
         console.log(err);
       }
+    });
+  }
+  private static initMetricsRoutes(router: Router) {
+    router.get("/api/metrics", async (req, res) => {
+      const metrics = await metricsHandlerFunctions.fetchMetrics();
+      res.status(200).send(metrics);
     });
   }
 }
