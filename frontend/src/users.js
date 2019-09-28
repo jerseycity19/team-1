@@ -15,6 +15,7 @@ class Users extends React.Component {
         questionLength: 0,
         answers: [],
         selectedAnswer: '',
+        lastQuestion: false,
       }
 
       this.questionController = this.questionController.bind(this);
@@ -34,7 +35,7 @@ class Users extends React.Component {
             questionArray.push(res.data[i].text);
             let currAnswer = [];
             for (let j = 0; j < res.data[i].responses.length; j++) {
-              currAnswer.push({ label: res.data[i].responses[j], value: j});
+              currAnswer.push({ label: res.data[i].responses[j], value: j + 1});
             }
             answerArray.push(currAnswer)
           }
@@ -43,25 +44,29 @@ class Users extends React.Component {
         })
     };
 
-    questionController() {
+    questionController = () => {
       if (this.state.questionNumber < this.state.questionLength - 1) {
         this.setState({questionNumber: this.state.questionNumber += 1})
+        //axios.post("http://localhost:1000/api/answers")
       }
       else {
-        alert("MAX NUM QUESTIONS REACHED");
+        this.setState({lastQuestion: true});
       }
+      console.log(this.state.selectedAnswer);
+      this.setState({selectedAnswer: ''});
     };
 
     handleChange = selectedAnswer => {
       this.setState({selectedAnswer})
-      console.log(this.state.selectedAnswer);
+      //console.log(this.state.selectedAnswer);
     };
 
     render() {
-    console.log(this.state.answers);
+    //console.log(this.state.answers);
     let index = this.state.questionNumber;
     const { selectedAnswer } = this.state.selectedAnswer;
-    return (
+    if (!this.state.lastQuestion) {
+      return (
         <div>
           {/* <ul>
             <li>
@@ -75,13 +80,36 @@ class Users extends React.Component {
             </li>
           </ul> */}
           <p>{this.state.questions[index]}</p>
-          <Select options={ this.state.answers[index]} onChange={this.handleChange}></Select>
+          <Select value={selectedAnswer} options={ this.state.answers[index]} onChange={this.handleChange}></Select>
           <button onClick={this.questionController}>Next Question</button>
           
           <Route path="/users/:id" component={User} />
         </div>
 
     );
+  }
+  else {
+    return (
+      <div>
+        {/* <ul>
+          <li>
+            <Link to="/users/1">User 1 </Link>
+          </li>
+          <li>
+            <Link to="/users/2">User 2 </Link>
+          </li>
+          <li>
+            <Link to="/users/3">User 3 </Link>
+          </li>
+        </ul> */}
+        <button onClick={this.questionController}>Finish</button>
+        
+        <Route path="/users/:id" component={User} />
+      </div>
+
+  );
+  }
+    
   }
 }
 

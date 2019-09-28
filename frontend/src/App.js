@@ -1,14 +1,110 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import './mel-style.css';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from './logo.png';
+import frame from './Frame.png';
+import {
+  Route,
+  NavLink,
+  BrowserRouter as Router,
+  Switch
+} from "react-router-dom";
 
-class App extends React.Component {
+class LandingPage extends React.Component {
   render() {
-    return (
+    return(
       <div>
-       <h1>Home</h1>
+        <TopNavBar />
+        <Content />
+        <FillOutFormButton />
+        <ImageFrame />
       </div>
     );
   }
+}
+
+class TopNavBar extends React.Component {
+  render() {
+    return(
+      <Container>
+        <Row>
+          <Col sm={{ span: 4 }}>
+            <img src={logo} className="imageStyles"></img>
+          </Col>
+          <Col sm={{ span: 8}} className="NavbarStyles">
+            Protecting scholars and the freedom to think, question, and share ideas
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
+
+class Content extends React.Component {
+  render() {
+    return (
+      <Container className="default-text">
+        <Row>
+          <Col sm={{ span: 10, offset: 1 }} className="ContentStyles">
+            Scholars at Risk protects scholars suffering grave threats to their lives, 
+            liberty and well-being by arranging temporary research and teaching positions at institutions 
+            in our network as well as by providing advisory and referral services.
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ span: 10, offset: 1 }} className="ContentStyles">
+            Scholars at Risk has established several initiatives to identify, 
+            document and take action in response to attacks on scholars, 
+            students and their higher education communities.
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ span: 10, offset: 1 }} className="ContentStyles">
+            Around the world, the space for free inquiry and expression is shrinking. 
+            Scholars at Risk convenes faculty, students and higher education community members to 
+            discuss global and regional academic freedom climates and to develop solutions 
+            that strengthen the university space.
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
+
+class FillOutFormButton extends React.Component {
+  render() {
+    return (
+      <div>
+        <NavLink to="/demographics">
+          <button className="ButtonStyles">
+            Fill Out Form
+          </button>
+        </NavLink>
+      </div>
+    );
+  }
+}
+
+class ImageFrame extends React.Component {
+  render() {
+    return (
+      <div>
+        <img src={frame} className="imageFrame"></img>
+      </div>
+    );
+  }
+}
+
+function App() {
+  return (
+    <div>
+      <LandingPage />
+    </div>
+  );
 }
 
 export default App;

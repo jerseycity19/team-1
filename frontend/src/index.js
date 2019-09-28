@@ -11,32 +11,16 @@ import App from "./App";
 import Users from "./users";
 import Contact from "./contact";
 import Notfound from "./notfound";
+import Demographics from "./Demographics";
 
 const routing = (
   <Router>
     <div>
-      <ul>
-        <li>
-          <NavLink exact activeClassName="active" to="/">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink activeClassName="active" to="/users">
-            Users
-          </NavLink>
-        </li>
-        <li>
-          <NavLink activeClassName="active" to="/contact">
-            Contact
-          </NavLink>
-        </li>
-      </ul>
-      <hr />
       <Switch>
         <Route exact path="/" component={App} />
-        <Route path="/users" component={Users} />
+        <Route path="/demographics" component={Demographics}/>
         <Route path="/contact" component={Contact} />
+        <Route path="/users" component={Users} />
         <Route component={Notfound} />
       </Switch>
     </div>
