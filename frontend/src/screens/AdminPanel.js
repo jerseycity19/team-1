@@ -1,8 +1,6 @@
 import React from "react";
-import Select from "react-select";
-import { Route, Link, NavLink} from "react-router-dom";
 import axios from 'axios';
-import ProgressBar from 'react-bootstrap/ProgressBar';
+
 
 class AdminPanel extends React.Component {
     constructor(props) {
@@ -20,9 +18,6 @@ class AdminPanel extends React.Component {
         other: ""       
       }
     };
-
-
-
 
     componentDidMount() {
         axios.get("http://localhost:1000/api/metrics")
