@@ -1,6 +1,6 @@
 import { UserMongoDataStore } from "../../drivers/datastores/userMongoDatastore";
 
-interface Information {
+export interface Information {
   identification: string;
   ageRange: string;
   gender: string;
@@ -9,10 +9,11 @@ interface Information {
   employment: string;
   disciple: string;
   sensitivity: string;
+  userIp: string;
 }
 const dataStore = new UserMongoDataStore();
 
-export async function addAnonUser(params: { info: Information }) {
+export async function addAnonUserInfo(params: { info: Information }) {
   const { info } = params;
   try {
     await dataStore.addUser({ userInfo: info });

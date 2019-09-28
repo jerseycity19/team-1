@@ -39,8 +39,8 @@ export class ExpressRouteDriver {
     });
     router.post("/api/users", async (req, res) => {
       try {
-        const info = req.body.info;
-        const isComplete = await userHandlerFunctions.addAnonUser(info);
+        const info: userHandlerFunctions.Information = req.body.info;
+        const isComplete = await userHandlerFunctions.addAnonUserInfo({ info });
         if (isComplete) {
           res.status(200).send("Operation complete");
         }
