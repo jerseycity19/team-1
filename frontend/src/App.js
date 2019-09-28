@@ -79,7 +79,7 @@ class FillOutFormButton extends React.Component {
   render() {
     return (
       <div>
-        <NavLink to="/demographics">
+        <NavLink to="/userinfo">
           <button className="ButtonStyles">
             Fill Out Form
           </button>

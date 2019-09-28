@@ -11,14 +11,14 @@ import App from "./App";
 import Users from "./users";
 import Contact from "./contact";
 import Notfound from "./notfound";
-import Demographics from "./Demographics";
+import Userinfo from "./Userinfo";
 
 const routing = (
   <Router>
     <div>
       <Switch>
         <Route exact path="/" component={App} />
-        <Route path="/demographics" component={Demographics}/>
+        <Route path="/userinfo" component={Userinfo}/>
         <Route path="/contact" component={Contact} />
         <Route path="/users" component={Users} />
         <Route component={Notfound} />
