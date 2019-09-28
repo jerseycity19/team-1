@@ -1,5 +1,10 @@
 import { Router, Request } from "express";
 //import * as userHandlerFunctions from "../../user-module/Business-Logic";
+import * as userHandlerFunctions from "../../business-logic/handlers/userHandler";
+import * as reportHandlerFunctions from "../../business-logic/handlers/reportsHandler";
+import * as adminHandlerFunctions from "../../business-logic/handlers/adminHandler";
+import * as questionHandlerFunctions from "../../business-logic/handlers/questionHandler";
+
 import { Response } from "express-serve-static-core";
 //import { loginRequest } from "../../shared/entity";
 const version = require("../../../package.json").version;
@@ -22,6 +27,7 @@ export class ExpressRouteDriver {
     this.initUserRoutes(router);
     this.initReportsRoutes(router);
     this.initAdminRoutes(router);
+    this.initQuestionRoutes(router);
     return router;
   }
   private static initUserRoutes(router: Router) {
@@ -32,7 +38,15 @@ export class ExpressRouteDriver {
       // res.send(payload);
     });
     router.post("/api/users", async (req, res) => {
-      const info = req.body.info;
+      try {
+        const info = req.body.info;
+        const isComplete = await userHandlerFunctions.addAnonUser(info);
+        if (isComplete) {
+          res.status(200).send("Operation complete");
+        }
+      } catch (err) {
+        res.status(404);
+      }
       //call a function
     });
   }
@@ -44,13 +58,49 @@ export class ExpressRouteDriver {
       res.send("Show all access logs");
     });
     router.post("/api/reports", async (req, res) => {
-      const info = req.body.info;
+      try {
+        const info = req.body.info;
+        const isComplete = await reportHandlerFunctions.addReport({ info });
+
+        if (isComplete) {
+          res.status(200);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+
       //call a function
     });
   }
   private static initAdminRoutes(router: Router) {
-    router.get("/api/admin", async (req, res) => {
-      res.json("Admin routes");
+    router.post("/api/admin", async (req, res) => {
+      try {
+        const loginInfo = req.body;
+        const isComplete = await adminHandlerFunctions.login({ loginInfo });
+        if (isComplete) {
+          res.status(200);
+        }
+      } catch (err) {
+        res.status(404);
+      }
+    });
+  }
+
+  private static initQuestionRoutes(router: Router) {
+    //get all users
+    router.get("/api/questions", async (req, res) => {
+      try {
+        const questions = await questionHandlerFunctions.getAllQuestions();
+        if (questions) {
+          res.status(200).send(questions);
+        } else {
+          return [{ text: "No Questions Retrieved" }];
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      //  const payload = await userHandlerFunctions.fetchUsers();
+      // res.send(payload);
     });
   }
 }

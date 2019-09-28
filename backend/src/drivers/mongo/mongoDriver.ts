@@ -14,7 +14,7 @@ export class MongoDriver {
     try {
       await client.connect();
       console.log("connected");
-      return client.db("scholars").collection(collection);
+      return client.db("safe").collection(collection);
     } catch (err) {
       console.log("Error on connect: " + err);
     }
