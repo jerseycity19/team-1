@@ -93,19 +93,7 @@ class Questionnaire extends React.Component {
     const { selectedAnswer } = this.state.selectedAnswer;
     if (!this.state.lastQuestion) {
       return (
-        <div class="question">
-          {/* <ul>
-            <li>
-              <Link to="/users/1">User 1 </Link>
-            </li>
-            <li>
-              <Link to="/users/2">User 2 </Link>
-            </li>
-            <li>
-              <Link to="/users/3">User 3 </Link>
-            </li>
-          </ul> */}
-
+        <div class="question" className="questionPlacement">
           <h5 class="select">{this.state.questions[index].question}</h5>
           <div class="select"><Select value={selectedAnswer} options={ this.state.answers[index]} onChange={this.handleChange}></Select></div>
           <button class="button select" onClick={this.questionController}>Next Question</button><br />
@@ -118,8 +106,8 @@ class Questionnaire extends React.Component {
   else {
     return (
       <div>
-        <h1>Submit Information Anonymously</h1>
-        <NavLink to="/"><button onClick={this.questionController}>Submit</button></NavLink>
+        <h1 className="SIA">Submit Information Anonymously</h1>
+        <NavLink to="/"><button className="lastButton" onClick={this.questionController}>Submit</button></NavLink>
         <ImageFrame />
       </div>
 
