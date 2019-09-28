@@ -135,9 +135,10 @@ export class ExpressRouteDriver {
         res.send(404);
       }
     });
-    router.get("api/answers/metrics", async (req, res) => {
+    router.get("/api/answers/metrics", async (req, res) => {
       try {
         const fullMetrics = await answerHandlerFunctions.getAllResponseData();
+        res.status(200).send(fullMetrics);
       } catch (err) {
         res.send(404);
         console.log(err);
