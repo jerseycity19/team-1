@@ -31,6 +31,19 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
+    let postUserInfo = { info: {
+                            identification: this.input1,
+                            ageRange: this.input2,
+                            gender: this.input3,
+                            country: this.input4,
+                            language: this.input5,
+                            employment: this.input6,
+                            disciple: this.input7,
+                            sensitivity: this.input8,
+                            userIP: '199.253.244.19'
+
+                        }
+                      }
     alert('The value is: ' + this.input1.value + ' ' + this.input2.value + ' ' + this.input3.value + ' ' + this.input4.value + ' ' + this.input5.value + ' ' + this.input6.value + ' ' + this.input7.value + ' ' + this.input8.value);
     e.preventDefault();
   }
