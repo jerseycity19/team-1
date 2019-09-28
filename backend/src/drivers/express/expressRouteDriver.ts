@@ -4,6 +4,7 @@ import * as userHandlerFunctions from "../../business-logic/handlers/userHandler
 import * as reportHandlerFunctions from "../../business-logic/handlers/reportsHandler";
 import * as adminHandlerFunctions from "../../business-logic/handlers/adminHandler";
 import * as questionHandlerFunctions from "../../business-logic/handlers/questionHandler";
+import * as answerHandlerFunctions from "../../business-logic/handlers/answersHandler";
 
 import { Response } from "express-serve-static-core";
 //import { loginRequest } from "../../shared/entity";
@@ -28,6 +29,7 @@ export class ExpressRouteDriver {
     this.initReportsRoutes(router);
     this.initAdminRoutes(router);
     this.initQuestionRoutes(router);
+    this.initAnswersRoutes(router);
     return router;
   }
   private static initUserRoutes(router: Router) {
@@ -40,9 +42,9 @@ export class ExpressRouteDriver {
     router.post("/api/users", async (req, res) => {
       try {
         const info: userHandlerFunctions.Information = req.body.info;
-        const isComplete = await userHandlerFunctions.addAnonUserInfo({ info });
-        if (isComplete) {
-          res.status(200).send("Operation complete");
+        const userId = await userHandlerFunctions.addAnonUserInfo({ info });
+        if (userId) {
+          res.status(200).send(userId);
         }
       } catch (err) {
         res.status(404);
@@ -101,6 +103,43 @@ export class ExpressRouteDriver {
       }
       //  const payload = await userHandlerFunctions.fetchUsers();
       // res.send(payload);
+    });
+  }
+
+  private static initAnswersRoutes(router: Router) {
+    //get all users
+    router.get("/api/answers", async (req, res) => {
+      try {
+        const answers = await answerHandlerFunctions.getAllAnswers();
+        if (answers) {
+          res.status(200).send(answers);
+        } else {
+          return [{ text: "No Answers Retrieved" }];
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      //  const payload = await userHandlerFunctions.fetchUsers();
+      // res.send(payload);
+    });
+    router.post("/api/answers", async (req, res) => {
+      try {
+        const answer = req.body.answer;
+        if (answer) {
+          await answerHandlerFunctions.addAnswer(answer);
+          res.send(200);
+        }
+      } catch (err) {
+        res.send(404);
+      }
+    });
+    router.get("api/answers/metrics", async (req, res) => {
+      try {
+        const fullMetrics = await answerHandlerFunctions.getAllResponseData();
+      } catch (err) {
+        res.send(404);
+        console.log(err);
+      }
     });
   }
 }

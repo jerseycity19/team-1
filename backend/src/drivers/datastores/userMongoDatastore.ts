@@ -15,11 +15,13 @@ export class UserMongoDataStore {
    */
   async addUser(params: { userInfo: any }) {
     const { userInfo } = params;
-
+    let confirmation!: any;
     try {
-      this.userdb.insert(userInfo);
+      confirmation = await this.userdb.insertOne(userInfo);
+      return confirmation.insertedId;
     } catch (err) {
       console.log(err);
     }
   }
+  async findUser() {}
 }

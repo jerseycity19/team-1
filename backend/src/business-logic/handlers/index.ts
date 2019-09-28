@@ -1,1 +1,1 @@
-export { addAnonUser } from "./userHandler";
+export { addAnonUserInfo } from "./userHandler";
