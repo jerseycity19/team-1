@@ -12,6 +12,7 @@ import Users from "./users";
 import Contact from "./contact";
 import Notfound from "./notfound";
 import Userinfo from "./Userinfo";
+import LoginScreen from "./LoginScreen";
 
 const routing = (
   <Router>
@@ -21,6 +22,7 @@ const routing = (
         <Route path="/userinfo" component={Userinfo}/>
         <Route path="/contact" component={Contact} />
         <Route path="/users" component={Users} />
+        <Route path="/login" component={LoginScreen} />
         <Route component={Notfound} />
       </Switch>
     </div>

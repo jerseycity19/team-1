@@ -28,6 +28,7 @@ class ImageFrame extends React.Component {
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { UID: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -49,6 +50,7 @@ class App extends React.Component {
     axios.post("http://localhost:1000/api/users", postUserInfo)
       .then(function (response) {
         console.log(response);
+        this.setState({UID: response.uid});
       })
       .catch(function (error) {
         console.log(error);
