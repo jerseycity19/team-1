@@ -1,6 +1,7 @@
 import React from 'react';
 import frame from './Frame.png';
 import './isa-index.css';
+import axios from 'axios';
 
 class Userinfo extends React.Component {
   render() {
@@ -44,7 +45,14 @@ class App extends React.Component {
 
                         }
                       }
-    alert('The value is: ' + this.input1.value + ' ' + this.input2.value + ' ' + this.input3.value + ' ' + this.input4.value + ' ' + this.input5.value + ' ' + this.input6.value + ' ' + this.input7.value + ' ' + this.input8.value);
+    //alert('The value is: ' + this.input1.value + ' ' + this.input2.value + ' ' + this.input3.value + ' ' + this.input4.value + ' ' + this.input5.value + ' ' + this.input6.value + ' ' + this.input7.value + ' ' + this.input8.value);
+    axios.post("http://localhost:1000/api/users", postUserInfo)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
     e.preventDefault();
   }
 
