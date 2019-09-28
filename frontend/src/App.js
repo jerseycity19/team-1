@@ -91,7 +91,7 @@ class FillOutFormButton extends React.Component {
           </Col>
         </Row>
         <Row>
-          <NavLink to="/userinfo">
+          <NavLink to="/definition">
             <button className="ButtonStyles">
               Fill Out Form
             </button>
