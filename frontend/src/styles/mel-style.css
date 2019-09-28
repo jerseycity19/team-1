@@ -1,14 +1,15 @@
-
-@import url('https://fonts.googleapis.com/css?family=Raleway:600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 
 .default-text {
     font-family: 'Raleway';
+    font-size: 1.3rem;
 }
 
 .NavbarStyles {
-    width: 100%;
-    height: 10rem;
-    padding: 3.4rem;
+    width: 100vw;
+    height: 1.5rem;
+    padding-top: .75rem;
+    margin-bottom: 0.6rem;
     color: #CE222B;
     background-color: white; 
     text-align: center;
@@ -18,7 +19,7 @@
 }
 
 .ContentStyles {
-    margin: 1rem auto;
+    margin: .5rem auto;
 }
 
 .ButtonStyles {
@@ -27,8 +28,8 @@
     padding: .4rem;
     background-color: #00B9F2;
     border-radius: .5rem;
-    margin: 2rem 37%;
-    width: 26%;
+    margin: 1rem 30vw;
+    width: 30vw;
     height: 4rem;
     font-size: 2rem;
     font-family: 'Raleway';
@@ -36,15 +37,24 @@
     align-content: center;
 }
 
+.CheckBoxStyles {
+    border: none;
+    margin-top: .1rem;
+    font-family: 'Raleway';
+    justify-content: center;
+    align-content: center;
+}
+
 .imageStyles {
-    width: 120%;
-    padding: 3.4rem;
+    width: 20vw;
+    padding-top: .75rem;
+    margin-bottom: 0.6rem;
 }
 
 .imageFrame {
-    position: absolute;
-    bottom: 0%;
-    left: 0%;
-    width: 40%;
-    height: 40%;
+    position: fixed;
+    bottom: 0vw;
+    left: 0vw;
+    width: 40vw;
+    height: 20vw;
 }

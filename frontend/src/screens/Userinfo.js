@@ -71,7 +71,7 @@ class App extends React.Component {
       return <Redirect to={{pathname: '/questionnaire', state: { id: this.state.ID }}}></Redirect>
     }
     return (
-      <div>
+      <div className="rootParts bodyParts">
         <Userinfo />
         <div>
           <label>

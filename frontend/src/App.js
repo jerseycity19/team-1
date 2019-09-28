@@ -2,6 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 import './styles/mel-style.css';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -78,13 +79,25 @@ class Content extends React.Component {
 class FillOutFormButton extends React.Component {
   render() {
     return (
-      <div>
-        <NavLink to="/userinfo">
-          <button className="ButtonStyles">
-            Fill Out Form
-          </button>
-        </NavLink>
-      </div>
+      <Container>
+        <Row>
+          <Col sm= {{ span: 8, offset: 2 }}>
+            <Form>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="I understand and agree that the data I submit will be used anonymously
+                                                   in reports, studies and advocacy about self-censorship" className="CheckBoxStyles"/>
+              </Form.Group>
+            </Form>
+          </Col>
+        </Row>
+        <Row>
+          <NavLink to="/userinfo">
+            <button className="ButtonStyles">
+              Fill Out Form
+            </button>
+          </NavLink>
+        </Row>
+      </Container>
     );
   }
 }
