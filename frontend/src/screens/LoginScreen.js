@@ -38,7 +38,7 @@ class LoginScreen extends React.Component {
     render() {
     //console.log(this.state.answers);
     if (this.state.success === true) {
-        return <Redirect to="/admin"></Redirect>
+        return <Redirect to="/map"></Redirect>
     }
     return (
         <div>
