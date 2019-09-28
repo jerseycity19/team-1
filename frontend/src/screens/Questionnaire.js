@@ -28,7 +28,7 @@ class Questionnaire extends React.Component {
         answers: [],
         selectedAnswer: '',
         lastQuestion: false,
-        postArray: []
+        postArray: { "answers": []}
       }
 
       this.questionController = this.questionController.bind(this);
@@ -55,20 +55,20 @@ class Questionnaire extends React.Component {
           this.setState({questions: questionArray, questionLength: questionArray.length, answers: answerArray});
 
         })
-    };
+    }; 
 
     questionController = () => {
       if (this.state.questionNumber < this.state.questionLength - 1) {
         let ansObj = { "userId": this.state.id, "response": this.state.selectedAnswer, "questionId": this.state.questions[this.state.questionNumber].qid }
         let tempObj = this.state.postArray;
-        tempObj.push(ansObj);
+        tempObj.answers.push(ansObj);
         this.setState({questionNumber: this.state.questionNumber += 1, postArray: tempObj})
         console.log(this.state.postArray);
         //axios.post("http://localhost:1000/api/answers")
       }
       else {
         this.setState({lastQuestion: true});
-        //axios.post("http://localhost:1000/api/answers", this.state.postArray);
+        axios.post("http://localhost:1000/api/answers", this.state.postArray);
       }
       console.log(this.state.selectedAnswer);
       this.setState({selectedAnswer: ''});
@@ -102,7 +102,7 @@ class Questionnaire extends React.Component {
           <h5 class="select">{this.state.questions[index].question}</h5>
           <div class="select"><Select value={selectedAnswer} options={ this.state.answers[index]} onChange={this.handleChange}></Select></div>
           <button class="button select" onClick={this.questionController}>Next Question</button><br />
-          <div class="progress"><ProgressBar striped variant="success" now={(14 * index)} /></div>
+          <div class="progress"><ProgressBar animated now={14 * index} /></div>
           <ImageFrame />
         </div>
 
