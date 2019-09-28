@@ -39,8 +39,8 @@ class TopNavBar extends React.Component {
           <Col sm={{ span: 6}} className="NavbarStyles">
             Protecting scholars and the freedom to think, question, and share ideas
           </Col>
-          <Col sm={{ span: 1}} className="NavbarStyles">
-            <NavLink to="/login">Temp</NavLink>
+          <Col sm={{ span: 2}} className="NavbarStyles">
+            <NavLink to="/login">Login</NavLink>
           </Col>
         </Row>
       </Container>
