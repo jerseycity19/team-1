@@ -99,9 +99,8 @@ class Questionnaire extends React.Component {
   else {
     return (
       <div>
-        <h1>Complete!</h1>
-        <NavLink to="/"><button onClick={this.questionController}>Finish</button></NavLink>
-        
+        <h1>Submit Information Anonymously</h1>
+        <NavLink to="/"><button onClick={this.questionController}>Submit</button></NavLink>
       </div>
 
   );
