@@ -44,7 +44,7 @@ export class ExpressRouteDriver {
         const info: userHandlerFunctions.Information = req.body.info;
         const userId = await userHandlerFunctions.addAnonUserInfo({ info });
         if (userId) {
-          res.status(200).send(userId);
+          res.status(200).send({ id: userId });
         }
       } catch (err) {
         res.status(404);
