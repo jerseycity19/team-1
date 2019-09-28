@@ -23,26 +23,18 @@ export async function getAllAnswers() {
   return answers;
 }
 
-export async function addAnswer(answer: userResponse) {
-  const info = answer;
+export async function addAnswer(answers: userResponse[]) {
   try {
     let dbResponse: any;
-    console.log(answer);
-    if (answer) {
-      const document = await dataStore.fetchResponseByUserId(answer.userId);
-      if (!document) {
-        const response = mapAnswerDocToResponse(answer);
-        const mappedResponse = {
-          userId: answer.userId,
-          response: [response]
-        };
-        dbResponse = await dataStore.addAnswer({ answerInfo: mappedResponse });
-      } else {
-        const response = mapAnswerDocToResponse(answer);
-        console.log("response in else", response);
-        document[0].response.push(response);
-        dbResponse = await dataStore.updateResponseByUserId(document[0]);
-      }
+    console.log(answers);
+    if (answers) {
+      const response = answers.map(answer => mapAnswerDocToResponse(answer));
+      const mappedResponse = {
+        userId: answers[0].userId,
+        response
+      };
+      console.log(mappedResponse);
+      dbResponse = await dataStore.addAnswer({ answerInfo: mappedResponse });
     }
     //   console.log(document);
     //   if (!document) {
@@ -324,6 +316,7 @@ export async function getAllResponseData() {
 function mapAnswerDocToResponse(document: any) {
   const responses = document.response;
   const questionId = document.questionId;
+
   return {
     responses,
     questionId

@@ -126,9 +126,9 @@ export class ExpressRouteDriver {
     });
     router.post("/api/answers", async (req, res) => {
       try {
-        const answer = req.body.answer;
-        if (answer) {
-          await answerHandlerFunctions.addAnswer(answer);
+        const answers = req.body.answers;
+        if (answers) {
+          await answerHandlerFunctions.addAnswer(answers);
           res.send(200);
         }
       } catch (err) {
