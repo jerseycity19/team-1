@@ -21,13 +21,19 @@ export class ExpressRouteDriver {
      */
     this.initUserRoutes(router);
     this.initReportsRoutes(router);
+    this.initAdminRoutes(router);
     return router;
   }
   private static initUserRoutes(router: Router) {
     //get all users
     router.get("/api/users", async (req, res) => {
+      res.json("Return all users");
       //  const payload = await userHandlerFunctions.fetchUsers();
       // res.send(payload);
+    });
+    router.post("/api/users", async (req, res) => {
+      const info = req.body.info;
+      //call a function
     });
   }
   private static initReportsRoutes(router: Router) {
@@ -36,6 +42,15 @@ export class ExpressRouteDriver {
      */
     router.get("/api/reports", async (req, res) => {
       res.send("Show all access logs");
+    });
+    router.post("/api/reports", async (req, res) => {
+      const info = req.body.info;
+      //call a function
+    });
+  }
+  private static initAdminRoutes(router: Router) {
+    router.get("/api/admin", async (req, res) => {
+      res.json("Admin routes");
     });
   }
 }
