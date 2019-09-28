@@ -2,6 +2,7 @@ import React from "react";
 import Select from "react-select";
 import { Route, Link} from "react-router-dom";
 import axios from 'axios';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const User = ({ match }) => <p>{match.params.id}</p>;
 
@@ -82,7 +83,9 @@ class Users extends React.Component {
           <p>{this.state.questions[index]}</p>
           <Select value={selectedAnswer} options={ this.state.answers[index]} onChange={this.handleChange}></Select>
           <button onClick={this.questionController}>Next Question</button>
-          
+          <div>
+          <ProgressBar striped variant="success" now={(14 * index)} />
+          </div>
           <Route path="/users/:id" component={User} />
         </div>
 
