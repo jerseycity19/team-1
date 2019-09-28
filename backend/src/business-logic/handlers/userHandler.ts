@@ -16,8 +16,11 @@ const dataStore = new UserMongoDataStore();
 export async function addAnonUserInfo(params: { info: Information }) {
   const { info } = params;
   try {
-    await dataStore.addUser({ userInfo: info });
-    return true;
+    const dbResponse = await dataStore.addUser({ userInfo: info });
+    if (dbResponse) {
+      return dbResponse;
+    }
+    await dataStore.findUser();
   } catch (err) {
     console.log(err);
   }
