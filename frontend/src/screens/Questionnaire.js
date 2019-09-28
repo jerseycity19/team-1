@@ -1,12 +1,10 @@
 import React from "react";
 import Select from "react-select";
-import { Route, Link} from "react-router-dom";
+import { Route, Link, NavLink} from "react-router-dom";
 import axios from 'axios';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-const User = ({ match }) => <p>{match.params.id}</p>;
-
-class Users extends React.Component {
+class Questionnaire extends React.Component {
     constructor(props) {
       super(props);
 
@@ -86,7 +84,6 @@ class Users extends React.Component {
           <div>
           <ProgressBar striped variant="success" now={(14 * index)} />
           </div>
-          <Route path="/users/:id" component={User} />
         </div>
 
     );
@@ -94,20 +91,9 @@ class Users extends React.Component {
   else {
     return (
       <div>
-        {/* <ul>
-          <li>
-            <Link to="/users/1">User 1 </Link>
-          </li>
-          <li>
-            <Link to="/users/2">User 2 </Link>
-          </li>
-          <li>
-            <Link to="/users/3">User 3 </Link>
-          </li>
-        </ul> */}
-        <button onClick={this.questionController}>Finish</button>
+        <h1>Complete!</h1>
+        <NavLink to="/"><button onClick={this.questionController}>Finish</button></NavLink>
         
-        <Route path="/users/:id" component={User} />
       </div>
 
   );
@@ -116,4 +102,4 @@ class Users extends React.Component {
   }
 }
 
-export default Users;
+export default Questionnaire;

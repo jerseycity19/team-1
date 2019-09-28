@@ -23,7 +23,7 @@ class LoginScreen extends React.Component {
             this.setState({success: true})
         }
         else {
-            
+            alert("Invalid Credentials.");
         }
     }
 

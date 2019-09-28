@@ -1,7 +1,8 @@
 import React from 'react';
-import frame from './Frame.png';
-import './isa-index.css';
+import frame from '../images/Frame.png';
+import '../styles/isa-index.css';
 import axios from 'axios';
+import { Route, Link, Redirect} from "react-router-dom";
 
 class Userinfo extends React.Component {
   render() {
@@ -28,7 +29,7 @@ class ImageFrame extends React.Component {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { UID: '' };
+    this.state = { UID: '', completed: false };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -43,10 +44,9 @@ class App extends React.Component {
                             disciple: this.input7,
                             sensitivity: this.input8,
                             userIP: '199.253.244.19'
-
                         }
                       }
-    //alert('The value is: ' + this.input1.value + ' ' + this.input2.value + ' ' + this.input3.value + ' ' + this.input4.value + ' ' + this.input5.value + ' ' + this.input6.value + ' ' + this.input7.value + ' ' + this.input8.value);
+    alert('The value is: ' + this.input1.value + ' ' + this.input2.value + ' ' + this.input3.value + ' ' + this.input4.value + ' ' + this.input5.value + ' ' + this.input6.value + ' ' + this.input7.value + ' ' + this.input8.value);
     axios.post("http://localhost:1000/api/users", postUserInfo)
       .then(function (response) {
         console.log(response);
@@ -56,9 +56,12 @@ class App extends React.Component {
         console.log(error);
       })
     e.preventDefault();
+    this.setState({completed: true});
   }
-
   render() {
+    if (this.state.completed === true) {
+      return <Redirect to="/questionnaire"></Redirect>
+    }
     return (
       <div>
         <Userinfo />
