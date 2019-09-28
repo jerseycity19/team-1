@@ -8,11 +8,10 @@ import {
   Switch
 } from "react-router-dom";
 import App from "./App";
-import Users from "./users";
-import Contact from "./contact";
-import Notfound from "./notfound";
-import Userinfo from "./Userinfo";
-import LoginScreen from "./LoginScreen";
+import Questionnaire from "./screens/Questionnaire";
+import Notfound from "./screens/notfound";
+import Userinfo from "./screens/Userinfo";
+import LoginScreen from "./screens/LoginScreen";
 
 const routing = (
   <Router>
@@ -20,8 +19,7 @@ const routing = (
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/userinfo" component={Userinfo}/>
-        <Route path="/contact" component={Contact} />
-        <Route path="/users" component={Users} />
+        <Route path="/questionnaire" component={Questionnaire} />
         <Route path="/login" component={LoginScreen} />
         <Route component={Notfound} />
       </Switch>

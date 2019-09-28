@@ -2,11 +2,11 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import './mel-style.css';
+import './styles/mel-style.css';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.png';
-import frame from './Frame.png';
+import logo from './images/logo.png';
+import frame from './images/Frame.png';
 import {
   Route,
   NavLink,
