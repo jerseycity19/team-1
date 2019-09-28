@@ -26,6 +26,11 @@ export class AnswersMongoDatastore {
 
   async fetchResponseMetrics() {
     try {
+      /**
+       * Unifinished aggregation for fetching user information on
+       * answered questions, what country the user is from and how many people from a certain country are
+       * giving certain answers.
+       */
       await this.answersdb.aggregate([{}]);
     } catch (err) {
       console.log(err);
