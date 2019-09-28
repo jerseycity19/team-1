@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 import Select from "react-select";
 import { Route, Link, NavLink} from "react-router-dom";
@@ -112,8 +111,8 @@ class Questionnaire extends React.Component {
   else {
     return (
       <div>
-        <h1>Complete!</h1>
-        <NavLink to="/"><button onClick={this.questionController}>Finish</button></NavLink>
+        <h1>Submit Information Anonymously</h1>
+        <NavLink to="/"><button onClick={this.questionController}>Submit</button></NavLink>
         <ImageFrame />
       </div>
 
@@ -124,117 +123,3 @@ class Questionnaire extends React.Component {
 }
 
 export default Questionnaire;
-=======
-import React from "react";
-import Select from "react-select";
-import { Route, Link, NavLink} from "react-router-dom";
-import axios from 'axios';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-
-class Questionnaire extends React.Component {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        id: this.props.location.state.id,
-        questionNumber: 0,
-        questions: [{question: '', qid: ''}],
-        questionLength: 0,
-        answers: [],
-        selectedAnswer: '',
-        lastQuestion: false,
-        postArray: []
-      }
-
-      this.questionController = this.questionController.bind(this);
-      this.handleChange = this.handleChange.bind(this);
-    };
-
-    componentDidMount() {
-      axios.get('http://localhost:1000/api/questions')
-        .then(res => {
-          //const message1 = res.data.message;
-          //console.log(res);
-          //this.setState({message: message1})
-          //console.log(res);
-          let questionArray = [];
-          let answerArray = [];
-          for (let i = 0; i < res.data.length; i++) {
-            questionArray.push({ question: res.data[i].text, qid: res.data[i]._id });
-            let currAnswer = [];
-            for (let j = 0; j < res.data[i].responses.length; j++) {
-              currAnswer.push({ label: res.data[i].responses[j], value: j + 1 });
-            }
-            answerArray.push(currAnswer)
-          }
-          this.setState({questions: questionArray, questionLength: questionArray.length, answers: answerArray});
-
-        })
-    };
-
-    questionController = () => {
-      if (this.state.questionNumber < this.state.questionLength - 1) {
-        let ansObj = { "userId": this.state.id, "response": this.state.selectedAnswer, "questionId": this.state.questions[this.state.questionNumber].qid }
-        let tempObj = this.state.postArray;
-        tempObj.push(ansObj);
-        this.setState({questionNumber: this.state.questionNumber += 1, postArray: tempObj})
-        console.log(this.state.postArray);
-        //axios.post("http://localhost:1000/api/answers")
-      }
-      else {
-        this.setState({lastQuestion: true});
-        //axios.post("http://localhost:1000/api/answers", this.state.postArray);
-      }
-      console.log(this.state.selectedAnswer);
-      this.setState({selectedAnswer: ''});
-    };
-
-    handleChange = selectedAnswer => {
-      this.setState({selectedAnswer})
-      //console.log(this.state.selectedAnswer);
-    };
-
-    render() {
-    console.log(this.state.id);
-    //console.log(this.state.answers);
-    let index = this.state.questionNumber;
-    const { selectedAnswer } = this.state.selectedAnswer;
-    if (!this.state.lastQuestion) {
-      return (
-        <div>
-          {/* <ul>
-            <li>
-              <Link to="/users/1">User 1 </Link>
-            </li>
-            <li>
-              <Link to="/users/2">User 2 </Link>
-            </li>
-            <li>
-              <Link to="/users/3">User 3 </Link>
-            </li>
-          </ul> */}
-          <p>{this.state.questions[index].question}</p>
-          <Select value={selectedAnswer} options={ this.state.answers[index]} onChange={this.handleChange}></Select>
-          <button onClick={this.questionController}>Next Question</button>
-          <div>
-          <ProgressBar striped variant="success" now={(14 * index)} />
-          </div>
-        </div>
-
-    );
-  }
-  else {
-    return (
-      <div>
-        <h1>Submit Information Anonymously</h1>
-        <NavLink to="/"><button onClick={this.questionController}>Submit</button></NavLink>
-      </div>
-
-  );
-  }
-    
-  }
-}
-
-export default Questionnaire;
->>>>>>> 70e17771fd104a92870f651b2adaaa4053be284a
