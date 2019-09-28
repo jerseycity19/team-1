@@ -18,10 +18,9 @@ class ImageFrame extends React.Component {
 
 class ThankYou extends React.Component {
     render() {
-
         return (
         <div>
-            <h1>Thank you for sharing your views.</h1>
+            <h1 className="SIA">Thank you for sharing your views.</h1>
             <NavLink to="/"><button className="lastButton" onClick={this.questionController}>Home</button></NavLink>
             <ImageFrame />
         </div>
