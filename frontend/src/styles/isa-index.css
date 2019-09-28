@@ -1,0 +1,43 @@
+body {
+  margin: 2vw 5vh;
+  font-family: 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  align-items: center;
+  text-align: center;
+}
+#root{
+  text-align: left;
+  margin-left: 32vw;
+}
+input{
+  font-family: 'Raleway', sans-serif;
+  margin: 5px;
+}
+.logo{
+  max-height: 50px;
+}
+.button {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #00B9F2;
+  color: white;
+}
+.footer{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  max-width: 50vw;
+}
+.imageFrame {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 40vw;
+  height: 40vh;
+}

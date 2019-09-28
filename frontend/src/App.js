@@ -1,54 +1,109 @@
 import React from 'react';
-import logo from './logo.svg';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import './styles/mel-style.css';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from './images/logo.png';
+import frame from './images/Frame.png';
+import {
+  Route,
+  NavLink,
+  BrowserRouter as Router,
+  Switch
+} from "react-router-dom";
 
-class NameForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
+class LandingPage extends React.Component {
   render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+    return(
+      <div>
+        <TopNavBar />
+        <Content />
+        <FillOutFormButton />
+        <ImageFrame />
+      </div>
     );
   }
 }
 
-function Welcome() {
-  return (
-    <div>
-      <h1>Scholars At Risk</h1>
-      <p>My first component</p>
-    </div>
-  );
+class TopNavBar extends React.Component {
+  render() {
+    return(
+      <Container>
+        <Row>
+          <Col sm={{ span: 4 }}>
+            <img src={logo} className="imageStyles"></img>
+          </Col>
+          <Col sm={{ span: 8}} className="NavbarStyles">
+            Protecting scholars and the freedom to think, question, and share ideas
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
+
+class Content extends React.Component {
+  render() {
+    return (
+      <Container className="default-text">
+        <Row>
+          <Col sm={{ span: 10, offset: 1 }} className="ContentStyles">
+            Scholars at Risk protects scholars suffering grave threats to their lives, 
+            liberty and well-being by arranging temporary research and teaching positions at institutions 
+            in our network as well as by providing advisory and referral services.
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ span: 10, offset: 1 }} className="ContentStyles">
+            Scholars at Risk has established several initiatives to identify, 
+            document and take action in response to attacks on scholars, 
+            students and their higher education communities.
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ span: 10, offset: 1 }} className="ContentStyles">
+            Around the world, the space for free inquiry and expression is shrinking. 
+            Scholars at Risk convenes faculty, students and higher education community members to 
+            discuss global and regional academic freedom climates and to develop solutions 
+            that strengthen the university space.
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
+
+class FillOutFormButton extends React.Component {
+  render() {
+    return (
+      <div>
+        <NavLink to="/userinfo">
+          <button className="ButtonStyles">
+            Fill Out Form
+          </button>
+        </NavLink>
+      </div>
+    );
+  }
+}
+
+class ImageFrame extends React.Component {
+  render() {
+    return (
+      <div>
+        <img src={frame} className="imageFrame"></img>
+      </div>
+    );
+  }
 }
 
 function App() {
   return (
     <div>
-      <Welcome />
-      <NameForm />
+      <LandingPage />
     </div>
-
   );
 }
 
