@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import { Route, Link} from "react-router-dom";
+import { Route, Link, Redirect} from "react-router-dom";
 import axios from 'axios';
 
 class LoginScreen extends React.Component {
@@ -8,6 +8,7 @@ class LoginScreen extends React.Component {
       super(props);
 
       this.state = {
+        success: false,
         username: '',
         password: ''
       }
@@ -19,10 +20,10 @@ class LoginScreen extends React.Component {
 
     handleSubmit() {
         if (this.state.username === "admin" && this.state.password === "admin") {
-            alert("Success")
+            this.setState({success: true})
         }
         else {
-            alert("failed")
+            
         }
     }
 
@@ -36,6 +37,9 @@ class LoginScreen extends React.Component {
 
     render() {
     //console.log(this.state.answers);
+    if (this.state.success === true) {
+        return <Redirect to="/admin"></Redirect>
+    }
     return (
         <div>
             <form onSubmit={this.handleSubmit}>
