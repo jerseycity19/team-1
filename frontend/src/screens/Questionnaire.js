@@ -9,12 +9,14 @@ class Questionnaire extends React.Component {
       super(props);
 
       this.state = {
+        id: this.props.location.state.id,
         questionNumber: 0,
-        questions: [],
+        questions: [{question: '', qid: ''}],
         questionLength: 0,
         answers: [],
         selectedAnswer: '',
         lastQuestion: false,
+        postArray: []
       }
 
       this.questionController = this.questionController.bind(this);
@@ -31,10 +33,10 @@ class Questionnaire extends React.Component {
           let questionArray = [];
           let answerArray = [];
           for (let i = 0; i < res.data.length; i++) {
-            questionArray.push(res.data[i].text);
+            questionArray.push({ question: res.data[i].text, qid: res.data[i]._id });
             let currAnswer = [];
             for (let j = 0; j < res.data[i].responses.length; j++) {
-              currAnswer.push({ label: res.data[i].responses[j], value: j + 1});
+              currAnswer.push({ label: res.data[i].responses[j], value: j + 1 });
             }
             answerArray.push(currAnswer)
           }
@@ -45,11 +47,16 @@ class Questionnaire extends React.Component {
 
     questionController = () => {
       if (this.state.questionNumber < this.state.questionLength - 1) {
-        this.setState({questionNumber: this.state.questionNumber += 1})
+        let ansObj = { "userId": this.state.id, "response": this.state.selectedAnswer, "questionId": this.state.questions[this.state.questionNumber].qid }
+        let tempObj = this.state.postArray;
+        tempObj.push(ansObj);
+        this.setState({questionNumber: this.state.questionNumber += 1, postArray: tempObj})
+        console.log(this.state.postArray);
         //axios.post("http://localhost:1000/api/answers")
       }
       else {
         this.setState({lastQuestion: true});
+        axios.post("http://localhost:1000/api/answers", this.state.postArray);
       }
       console.log(this.state.selectedAnswer);
       this.setState({selectedAnswer: ''});
@@ -61,6 +68,7 @@ class Questionnaire extends React.Component {
     };
 
     render() {
+    console.log(this.state.id);
     //console.log(this.state.answers);
     let index = this.state.questionNumber;
     const { selectedAnswer } = this.state.selectedAnswer;
@@ -78,7 +86,7 @@ class Questionnaire extends React.Component {
               <Link to="/users/3">User 3 </Link>
             </li>
           </ul> */}
-          <p>{this.state.questions[index]}</p>
+          <p>{this.state.questions[index].question}</p>
           <Select value={selectedAnswer} options={ this.state.answers[index]} onChange={this.handleChange}></Select>
           <button onClick={this.questionController}>Next Question</button>
           <div>

@@ -19,7 +19,7 @@ const routing = (
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/userinfo" component={Userinfo}/>
-        <Route path="/questionnaire" component={Questionnaire} />
+        <Route path="/questionnaire" component={Questionnaire}/>
         <Route path="/login" component={LoginScreen} />
         <Route component={Notfound} />
       </Switch>
