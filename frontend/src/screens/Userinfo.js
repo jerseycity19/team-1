@@ -8,7 +8,7 @@ class Userinfo extends React.Component {
   render() {
     return (
       <div>
-        <img class="logo" src="https://www.scholarsatrisk.org/wp-content/themes/sink_sar/images/logo.png"/>
+        <img className="logo" src="https://www.scholarsatrisk.org/wp-content/themes/sink_sar/images/logo.png"/>
         <h1>User Information</h1>
       </div>
 
@@ -29,43 +29,51 @@ class ImageFrame extends React.Component {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { UID: '', completed: false };
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { ID: '', completed: false };
   }
 
-  handleSubmit(e) {
-    let postUserInfo = { info: {
-                            identification: this.input1,
-                            ageRange: this.input2,
-                            gender: this.input3,
-                            country: this.input4,
-                            language: this.input5,
-                            employment: this.input6,
-                            disciple: this.input7,
-                            sensitivity: this.input8,
-                            userIP: '199.253.244.19'
+  handleSubmit = (e) => {
+    let postUserInfo = { "info": {
+                            "identification": this.input1.value,
+                            "ageRange": this.input2.value,
+                            "gender": this.input3.value,
+                            "country": this.input4.value,
+                            "language": this.input5.value,
+                            "employment": this.input6.value,
+                            "disciple": this.input7.value,
+                            "sensitivity": this.input8.value,
+                            "userIp": "199.253.244.19"
                         }
                       }
-    alert('The value is: ' + this.input1.value + ' ' + this.input2.value + ' ' + this.input3.value + ' ' + this.input4.value + ' ' + this.input5.value + ' ' + this.input6.value + ' ' + this.input7.value + ' ' + this.input8.value);
+    let id = '';
+    //alert('The value is: ' + this.input1.value + ' ' + this.input2.value + ' ' + this.input3.value + ' ' + this.input4.value + ' ' + this.input5.value + ' ' + this.input6.value + ' ' + this.input7.value + ' ' + this.input8.value);
     axios.post("http://localhost:1000/api/users", postUserInfo)
-      .then(function (response) {
-        console.log(response);
-        this.setState({UID: response.uid});
+      .then(response => {
+        //console.log(response);
+        id = response.data.id;
+        this.setState({ID: id})
       })
       .catch(function (error) {
         console.log(error);
       })
     e.preventDefault();
-    this.setState({completed: true});
+    setTimeout(() => {
+        this.setState({completed: true}); 
+    }, 1000);
+  
+    
+    
   }
   render() {
+    
     if (this.state.completed === true) {
-      return <Redirect to="/questionnaire"></Redirect>
+      console.log(this.state.ID);
+      return <Redirect to={{pathname: '/questionnaire', state: { id: this.state.ID }}}></Redirect>
     }
     return (
       <div>
         <Userinfo />
-        <form onSubmit={this.handleSubmit}>
+        <div>
           <label>
             User Identification:
             <input list="user_id" ref={(input) => this.input1 = input} />
@@ -158,8 +166,8 @@ class App extends React.Component {
               <option value="Extremely Sensitive">Extremely Sensitive</option>
             </datalist>
           </label><br />
-          <input class="button" type="submit" value="Submit" />
-        </form>
+          <button className="button" type="button" value="Submit" onClick={(e) => this.handleSubmit(e)}>Submit </button>
+        </div>
         <ImageFrame />
       </div>
     );
