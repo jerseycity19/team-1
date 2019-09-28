@@ -3,6 +3,18 @@ import Select from "react-select";
 import { Route, Link, NavLink} from "react-router-dom";
 import axios from 'axios';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import '../styles/isa-index.css';
+import frame from '../images/Frame.png';
+
+class ImageFrame extends React.Component {
+  render() {
+    return (
+      <div>
+        <img src={frame} className="imageFrame"></img>
+      </div>
+    );
+  }
+}
 
 class Questionnaire extends React.Component {
     constructor(props) {
@@ -74,7 +86,7 @@ class Questionnaire extends React.Component {
     const { selectedAnswer } = this.state.selectedAnswer;
     if (!this.state.lastQuestion) {
       return (
-        <div>
+        <div class="question">
           {/* <ul>
             <li>
               <Link to="/users/1">User 1 </Link>
@@ -86,12 +98,12 @@ class Questionnaire extends React.Component {
               <Link to="/users/3">User 3 </Link>
             </li>
           </ul> */}
-          <p>{this.state.questions[index].question}</p>
-          <Select value={selectedAnswer} options={ this.state.answers[index]} onChange={this.handleChange}></Select>
-          <button onClick={this.questionController}>Next Question</button>
-          <div>
-          <ProgressBar striped variant="success" now={(14 * index)} />
-          </div>
+
+          <h5 class="select">{this.state.questions[index].question}</h5>
+          <div class="select"><Select value={selectedAnswer} options={ this.state.answers[index]} onChange={this.handleChange}></Select></div>
+          <button class="button select" onClick={this.questionController}>Next Question</button><br />
+          <div class="progress"><ProgressBar striped variant="success" now={(14 * index)} /></div>
+          <ImageFrame />
         </div>
 
     );
@@ -101,12 +113,12 @@ class Questionnaire extends React.Component {
       <div>
         <h1>Complete!</h1>
         <NavLink to="/"><button onClick={this.questionController}>Finish</button></NavLink>
-        
+        <ImageFrame />
       </div>
 
   );
   }
-    
+
   }
 }
 

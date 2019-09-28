@@ -17,16 +17,32 @@ input{
 .logo{
   max-height: 50px;
 }
+.question{
+  align-items: center;
+  margin:auto;
+  max-width: 40vw;
+}
 .button {
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   padding: 8px;
+  margin-top: 5px;
   border-radius: 4px;
-}
-
-.button:hover {
   background-color: #00B9F2;
   color: white;
+}
+.progress{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+}
+.select{
+  padding: 10px;
+  position: relative;
+  top: 25vh;
+  right: 15vw;
+  align-self: center;
 }
 .footer{
   position: absolute;
@@ -36,8 +52,8 @@ input{
 }
 .imageFrame {
   position: absolute;
-  bottom: 0%;
-  left: 0%;
+  bottom: 0px;
+  left: 0px;
   width: 40vw;
   height: 40vh;
 }
