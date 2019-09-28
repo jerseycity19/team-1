@@ -107,7 +107,7 @@ class Questionnaire extends React.Component {
     return (
       <div>
         <h1 className="SIA">Submit Information Anonymously</h1>
-        <NavLink to="/"><button className="lastButton" onClick={this.questionController}>Submit</button></NavLink>
+        <NavLink to="/thankyou"><button className="lastButton" onClick={this.questionController}>Submit</button></NavLink>
         <ImageFrame />
       </div>
 

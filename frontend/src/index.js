@@ -14,6 +14,7 @@ import Userinfo from "./screens/Userinfo";
 import LoginScreen from "./screens/LoginScreen";
 import BasicMap from "./screens/BasicMap";
 import AdminPanel from "./screens/AdminPanel";
+import ThankYou from "./screens/ThankYou";
 
 const routing = (
   <Router>
@@ -25,6 +26,7 @@ const routing = (
         <Route path="/login" component={LoginScreen} />
         <Route path="/map" component={BasicMap}/>
         <Route path="/admin" component={AdminPanel}/>
+        <Route path="/thankyou" component={ThankYou}/>
         <Route component={Notfound} />
       </Switch>
     </div>
