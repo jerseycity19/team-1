@@ -1,55 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-class NameForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
+class App extends React.Component {
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+       <h1>Home</h1>
+      </div>
     );
   }
-}
-
-function Welcome() {
-  return (
-    <div>
-      <h1>Scholars At Risk</h1>
-      <p>My first component</p>
-    </div>
-  );
-}
-
-function App() {
-  return (
-    <div>
-      <Welcome />
-      <NameForm />
-    </div>
-
-  );
 }
 
 export default App;
