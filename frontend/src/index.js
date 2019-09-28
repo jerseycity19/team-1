@@ -12,6 +12,7 @@ import Questionnaire from "./screens/Questionnaire";
 import Notfound from "./screens/notfound";
 import Userinfo from "./screens/Userinfo";
 import LoginScreen from "./screens/LoginScreen";
+import BasicMap from "./screens/BasicMap";
 
 const routing = (
   <Router>
@@ -21,6 +22,7 @@ const routing = (
         <Route path="/userinfo" component={Userinfo}/>
         <Route path="/questionnaire" component={Questionnaire}/>
         <Route path="/login" component={LoginScreen} />
+        <Route path="/map" component={BasicMap}/>
         <Route component={Notfound} />
       </Switch>
     </div>

@@ -56,7 +56,7 @@ class Questionnaire extends React.Component {
       }
       else {
         this.setState({lastQuestion: true});
-        axios.post("http://localhost:1000/api/answers", this.state.postArray);
+        //axios.post("http://localhost:1000/api/answers", this.state.postArray);
       }
       console.log(this.state.selectedAnswer);
       this.setState({selectedAnswer: ''});
