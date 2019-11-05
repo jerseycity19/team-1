@@ -19,7 +19,7 @@ class LoginScreen extends React.Component {
     };
 
     handleSubmit() {
-        if ( this.state.username === "" &&  this.state.password === "") {
+        if (this.state.username === "" && this.state.password === "") {
             this.setState({success: true})
         }
         else {
